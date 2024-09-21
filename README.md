@@ -1,11 +1,12 @@
 
 
 # Building a SOC + Honeynet in Azure (Live Traffic)
-![Cloud Honeynet / SOC](https://i.imgur.com/ZWxe03e.jpg)
+![Design](https://github.com/user-attachments/assets/93cb9a71-b8fc-4587-9fe4-f26465280b9e)
+
 
 ## Introduction
 
-In this project, I build a mini honeynet in Azure and ingest log sources from various resources into a Log Analytics workspace, which is then used by Microsoft Sentinel to build attack maps, trigger alerts, and create incidents. I measured some security metrics in the insecure environment for 24 hours, apply some security controls to harden the environment, measure metrics for another 24 hours, then show the results below. The metrics we will show are:
+In this project, I build a mini honeynet in Azure and ingest log sources from various resources into a Log Analytics workspace, which is then used by Microsoft Sentinel to build attack maps, trigger alerts, and create incidents. I measured some security metrics in the insecure environment for 48 hours, apply some security controls to harden the environment, measure metrics for another 24 hours, then show the results below. The metrics we will show are:
 
 - SecurityEvent (Windows Event Logs)
 - Syslog (Linux Event Logs)
@@ -34,41 +35,30 @@ For the "BEFORE" metrics, all resources were originally deployed, exposed to the
 For the "AFTER" metrics, Network Security Groups were hardened by blocking ALL traffic with the exception of my admin workstation, and all other resources were protected by their built-in firewalls as well as Private Endpoint
 
 ## Attack Maps Before Hardening / Security Controls
-![NSG Allowed Inbound Malicious Flows](https://i.imgur.com/1qvswSX.png)<br>
-![Linux Syslog Auth Failures](https://i.imgur.com/G1YgZt6.png)<br>
-![Windows RDP/SMB Auth Failures](https://i.imgur.com/ESr9Dlv.png)<br>
+<b>NSG Allowed Inbound Malicious Flows</b>![nsg](https://github.com/user-attachments/assets/baad78df-0470-4c64-8ab3-cda99bcf75bd)
+
+<b>Linux Syslog Auth Failures</b>![linux](https://github.com/user-attachments/assets/fa317461-ca9f-467f-b288-6287f8c1e69b)
+
+<b>Windows RDP/SMB Auth Failures</b>![Windows rdp](https://github.com/user-attachments/assets/4ba159ed-7cee-4bcb-8b06-b581c983c230)
+
 
 ## Metrics Before Hardening / Security Controls
 
-The following table shows the metrics we measured in our insecure environment for 24 hours:
-Start Time 2023-03-15 17:04:29
-Stop Time 2023-03-16 17:04:29
+The following table shows the metrics we measured in our insecure environment for 48 hours:
 
-| Metric                   | Count
-| ------------------------ | -----
-| SecurityEvent            | 19470
-| Syslog                   | 3028
-| SecurityAlert            | 10
-| SecurityIncident         | 348
-| AzureNetworkAnalytics_CL | 843
+![Screenshot 2024-09-21 185743](https://github.com/user-attachments/assets/1b8d0be5-3d7a-4ea5-8705-3455a0c9ebbc)
+
 
 ## Attack Maps Before Hardening / Security Controls
 
-```All map queries actually returned no results due to no instances of malicious activity for the 24 hour period after hardening.```
+```All map queries actually returned no results due to no instances of malicious activity for the 48 hour period after hardening.```
 
 ## Metrics After Hardening / Security Controls
 
-The following table shows the metrics we measured in our environment for another 24 hours, but after we have applied security controls:
-Start Time 2023-03-18 15:37
-Stop Time	2023-03-19 15:37
+The following table shows the metrics we measured in our environment for another 48 hours, but after we have applied security controls:
 
-| Metric                   | Count
-| ------------------------ | -----
-| SecurityEvent            | 8778
-| Syslog                   | 25
-| SecurityAlert            | 0
-| SecurityIncident         | 0
-| AzureNetworkAnalytics_CL | 0
+![Screenshot 2024-09-21 185759](https://github.com/user-attachments/assets/2f76181d-6d4b-4f65-b99a-7ff22e4f88d3)
+
 
 ## Conclusion
 
